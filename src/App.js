@@ -5,13 +5,29 @@ import "./styles/reset.css"
 import "./styles/styles.css"
 
 function App() {
-  const [value, setValue] = React.useState("**Hello world!!!**");
   const vpHeight = window.innerHeight;
+
+  const [value, setValue] = React.useState("**Hello world!!!**");
+  const [notes, setNotes] = React.useState([]);
+
+  function addNote() {
+    setNotes([...notes, {
+      noteID: notes.length + 1,
+      text: value
+    }])
+  }
+
   return (
     <>
+      <div className="btnrow">
+        <button onClick={addNote}>button</button>
+      </div>
+
       <div className="row vh-100">
         <div className="col-2">
-          <Sidebar />
+          <Sidebar 
+            notes = {notes}
+          />
         </div>
         <div className="col-10">
           <MDEditor 

@@ -2,10 +2,16 @@ import React from "react"
 
 export default function Sidebar(props) {
     let notesArr = props.notes;
-    
+    console.log(notesArr)
     const noteMap = notesArr.map(item => {
         return (
-            <div key={item.noteID}>{item.text}</div>
+            <div 
+                key={item.noteID} 
+                onClick={() => props.handleClick(item.noteID)}
+                className="sideBarDiv"
+            >
+                    Note {item.noteID}
+            </div>
         )
     })
 

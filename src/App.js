@@ -5,7 +5,7 @@ import "./styles/reset.css"
 import "./styles/styles.css"
 
 function App() {
-  const vpHeight = window.innerHeight;
+  const vpHeight = window.innerHeight - 40;
 
   const [value, setValue] = React.useState("**Hello world!!!**");
   const [notes, setNotes] = React.useState([]);
@@ -15,6 +15,11 @@ function App() {
       noteID: notes.length + 1,
       text: value
     }])
+    console.log(value);
+  }
+
+  function displayNote(id) {
+    setValue(notes[id - 1].text)
   }
 
   return (
@@ -27,6 +32,7 @@ function App() {
         <div className="col-2">
           <Sidebar 
             notes = {notes}
+            handleClick = {displayNote}
           />
         </div>
         <div className="col-10">

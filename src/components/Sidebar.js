@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import "../styles/sideBar.css";
 
 export default function Sidebar(props) {
     let notesArr = props.notes;
@@ -10,7 +11,7 @@ export default function Sidebar(props) {
                 onClick={() => props.handleClick(item.noteID)}
                 className="sideBarDiv"
             >
-                    Note {item.noteID}
+                 <p>Note {item.noteID}</p>   
             </div>
         )
     })

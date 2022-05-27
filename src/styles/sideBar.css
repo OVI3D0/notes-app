@@ -1,0 +1,10 @@
+.sideBarDiv {
+    background-color: grey;
+    height: 40px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.sideBarDiv:hover {
+    background-color: yellow;
+}

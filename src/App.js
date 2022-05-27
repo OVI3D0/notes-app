@@ -25,7 +25,7 @@ function App() {
   return (
     <>
       <div className="btnrow">
-        <button onClick={addNote}>button</button>
+        <button onClick={addNote}>Save note</button>
       </div>
 
       <div className="row vh-100">

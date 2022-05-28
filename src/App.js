@@ -1,6 +1,7 @@
 import React from "react";
 import Sidebar from "./components/Sidebar";
 import MDEditor from "@uiw/react-md-editor";
+import { nanoid } from "nanoid";
 import "./styles/reset.css"
 import "./styles/styles.css"
 
@@ -9,23 +10,38 @@ function App() {
 
   const [value, setValue] = React.useState("**Hello world!!!**");
   const [notes, setNotes] = React.useState([]);
+  const [currentNote, setCurrentNote] = React.useState();
 
   function addNote() {
     setNotes([...notes, {
-      noteID: notes.length + 1,
+      noteID: nanoid(),
       text: value
     }])
-    console.log(value);
   }
 
-  function displayNote(id) {
-    setValue(notes[id - 1].text)
+  function displayNote(noteID) {
+    setCurrentNote(noteID)
+    for(let i = 0; i < notes.length; i++) {
+      if(notes[i].noteID === noteID) {
+        setValue(notes[i].text)
+      }
+    }
+  }
+
+  function delNote(id) {
+    // alert(`Are you sure you want to delete note ${id}?`)
+    setNotes(prevNotes => {
+      return prevNotes.map((note) => {
+        return note.noteID === id ? prevNotes.splice(note.noteID - 1, 1) : note
+      })
+    })
   }
 
   return (
     <>
       <div className="btnrow">
         <button onClick={addNote}>Save note</button>
+        <button onClick={() => delNote(currentNote)}>Delete note</button>
       </div>
 
       <div className="row vh-100">

@@ -6,12 +6,11 @@ export default function Sidebar(props) {
     const noteMap = notesArr.map(item => {
         return (
             <div 
-                key={item.noteID} 
-                id={item.noteID}
+                key={item.noteID}
                 onClick={() => props.handleClick(item.noteID)}
                 className="sideBarDiv"
             >
-                 <p>Note {item.noteID}</p>   
+                 <p>{item.title}</p>   
             </div>
         )
     })

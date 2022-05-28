@@ -29,12 +29,20 @@ function App() {
   }
 
   function delNote(currentNote) {
-    // alert(`Are you sure you want to delete note ${id}?`)
-    setNotes(prevNotes => {
-      return prevNotes.map((note) => {
-        return note.noteID === currentNote ? prevNotes.splice(note, 1) : note
-      })
-    })
+    let answer = window.confirm("Delete note?")
+
+    if(answer) {
+      let newArr = []
+      for(let i = 0; i < notes.length; i++) {
+        if(notes[i].noteID !== currentNote) {
+          newArr.push(notes[i])
+        }
+      }
+      setNotes(newArr)
+    } else {
+      console.log("note was not deleted")
+    }
+
   }
 
   return (

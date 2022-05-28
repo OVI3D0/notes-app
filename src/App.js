@@ -28,11 +28,11 @@ function App() {
     }
   }
 
-  function delNote(id) {
+  function delNote(currentNote) {
     // alert(`Are you sure you want to delete note ${id}?`)
     setNotes(prevNotes => {
       return prevNotes.map((note) => {
-        return note.noteID === id ? prevNotes.splice(note.noteID - 1, 1) : note
+        return note.noteID === currentNote ? prevNotes.splice(note, 1) : note
       })
     })
   }

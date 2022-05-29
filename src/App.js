@@ -50,6 +50,12 @@ function App() {
         }
       }
       setNotes(newArr)
+      setValue(prevValue => {
+        return {
+          text: "",
+          title: ""
+        }
+      })
     } else {
       console.log("note was not deleted")
     }

@@ -1,6 +1,6 @@
 import React from "react";
 import Sidebar from "./components/Sidebar";
-import MDEditor, { title } from "@uiw/react-md-editor";
+import MDEditor from "@uiw/react-md-editor";
 import { nanoid } from "nanoid";
 import "./styles/reset.css"
 import "./styles/styles.css"
@@ -15,15 +15,6 @@ function App() {
   })
   const [notes, setNotes] = React.useState([]);
   const [currentNote, setCurrentNote] = React.useState();
-
-  function handleChange(event) {
-    setValue(prevValue => {
-      return {
-        ...prevValue,
-        [event.target.name]: event.target.value
-      }
-    })
-  }
 
   function addNote() {
     setNotes([...notes, {
@@ -73,7 +64,12 @@ function App() {
           type="text"
           placeholder="Note Title"
           name="title"
-          onChange={handleChange}
+          onChange={(e) => setValue(prevValue => {
+            return {
+              ...prevValue,
+              title: e.target.value
+            }
+          })}
           value={value.title}
         />
       </div>
@@ -86,11 +82,17 @@ function App() {
           />
         </div>
         <div className="col-10 ps-0">
-          <MDEditor 
-            name="text"
+          <MDEditor
             value={value.text}
             height={vpHeight}
-            onChange={handleChange}
+            onChange={(val) => {
+              setValue(prevValue => {
+                return {
+                  ...prevValue,
+                  text: val
+                }
+              })
+            }}
           />
         </div>
       </div>

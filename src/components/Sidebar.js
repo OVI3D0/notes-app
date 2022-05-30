@@ -8,9 +8,9 @@ export default function Sidebar(props) {
             <div 
                 key={item.noteID}
                 onClick={() => props.handleClick(item.noteID)}
-                className="sideBarDiv"
+                className={`${props.mode ? "dark" : "light"} sideBarDiv align-items-center d-flex`}
             >
-                 <p>{item.title}</p>   
+                 {item.title}   
             </div>
         )
     })

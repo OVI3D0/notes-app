@@ -95,6 +95,7 @@ function App() {
           <Sidebar 
             notes = {notes}
             handleClick = {displayNote}
+            mode={darkMode}
           />
         </div>
         <div className="col-10 ps-0">

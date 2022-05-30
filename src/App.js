@@ -15,6 +15,11 @@ function App() {
   })
   const [notes, setNotes] = React.useState([]);
   const [currentNote, setCurrentNote] = React.useState();
+  const [darkMode, setDarkMode] = React.useState(true);
+
+  function toggle() {
+    setDarkMode(prevMode => !prevMode)
+  }
 
   function addNote() {
     setNotes([...notes, {
@@ -62,11 +67,13 @@ function App() {
   }
 
   return (
-    <>
-      <div className="btnrow">
-        <button onClick={addNote}>Save note</button>
-        <button onClick={() => delNote(currentNote)}>Delete note</button>
+    <div className={darkMode ? "dark" : "light"}
+    data-color-mode={darkMode ? "dark" : "light"}
+    >
+      <div className="btnrow mb-2">
+        <h1 className="title text-center">Title</h1>
         <input
+          className="form-control mb-2"
           type="text"
           placeholder="Note Title"
           name="title"
@@ -78,6 +85,9 @@ function App() {
           })}
           value={value.title}
         />
+        <button className="btn btn-success" onClick={addNote}>Save note</button>
+        <button className=" btn btn-danger" onClick={() => delNote(currentNote)}>Delete note</button>
+        <button className="btn btn-dark" onClick={toggle}>Dark mode</button>
       </div>
 
       <div className="row vh-100">
@@ -102,7 +112,7 @@ function App() {
           />
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

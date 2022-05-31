@@ -15,24 +15,51 @@ function App() {
   })
   const [notes, setNotes] = React.useState([]);
   const [currentNote, setCurrentNote] = React.useState();
-  const [darkMode, setDarkMode] = React.useState(true);
+  const [darkMode, setDarkMode] = React.useState(false);
 
   function toggle() {
     setDarkMode(prevMode => !prevMode)
   }
 
+  // for(let i = 1; i < localStorage.length; i++) {
+  //   let note = localStorage.getItem(i);
+  //   let storedNote = JSON.parse(note)
+  //   console.log(storedNote)
+  //   setNotes([...notes, {
+  //     noteID: storedNote.noteID,
+  //     title: storedNote.title,
+  //     text: storedNote.text
+  //   }])
+  // }
+
+  React.useEffect(() => {
+    for (let i = 0; i <= localStorage.length; i++) {
+      let note = JSON.parse(localStorage.getItem(i));
+      if(note !== null){
+        console.log(note)
+        setNotes(prevNotes => [...prevNotes, note])
+      }
+    }
+  }, [])
+
   function addNote() {
-    setNotes([...notes, {
+    let noteObj = {
       noteID: nanoid(),
       text: value.text,
       title: value.title
+    }
+    setNotes([...notes, {
+      noteID: noteObj.noteID,
+      text: noteObj.text,
+      title: noteObj.title
     }])
+    localStorage.setItem(localStorage.length, JSON.stringify(noteObj))
   }
 
   function displayNote(noteID) {
     setCurrentNote(noteID)
-    for(let i = 0; i < notes.length; i++) {
-      if(notes[i].noteID === noteID) {
+    for (let i = 0; i < notes.length; i++) {
+      if (notes[i].noteID === noteID) {
         setValue(prevValue => {
           return {
             ...prevValue,
@@ -47,10 +74,10 @@ function App() {
   function delNote(currentNote) {
     let answer = window.confirm("Delete note?")
 
-    if(answer) {
+    if (answer) {
       let newArr = []
-      for(let i = 0; i < notes.length; i++) {
-        if(notes[i].noteID !== currentNote) {
+      for (let i = 0; i < notes.length; i++) {
+        if (notes[i].noteID !== currentNote) {
           newArr.push(notes[i])
         }
       }
@@ -68,7 +95,7 @@ function App() {
 
   return (
     <div className={darkMode ? "dark" : "light"}
-    data-color-mode={darkMode ? "dark" : "light"}
+      data-color-mode={darkMode ? "dark" : "light"}
     >
       <div className="btnrow mb-2">
         <h1 className="title text-center">Title</h1>
@@ -92,9 +119,9 @@ function App() {
 
       <div className="row vh-100">
         <div className="col-2 pe-0">
-          <Sidebar 
-            notes = {notes}
-            handleClick = {displayNote}
+          <Sidebar
+            notes={notes}
+            handleClick={displayNote}
             mode={darkMode}
           />
         </div>

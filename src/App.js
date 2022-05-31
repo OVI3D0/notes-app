@@ -21,17 +21,6 @@ function App() {
     setDarkMode(prevMode => !prevMode)
   }
 
-  // for(let i = 1; i < localStorage.length; i++) {
-  //   let note = localStorage.getItem(i);
-  //   let storedNote = JSON.parse(note)
-  //   console.log(storedNote)
-  //   setNotes([...notes, {
-  //     noteID: storedNote.noteID,
-  //     title: storedNote.title,
-  //     text: storedNote.text
-  //   }])
-  // }
-
   React.useEffect(() => {
     for (let i = 0; i <= localStorage.length; i++) {
       let note = JSON.parse(localStorage.getItem(i));

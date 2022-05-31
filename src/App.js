@@ -79,6 +79,8 @@ function App() {
       for (let i = 0; i < notes.length; i++) {
         if (notes[i].noteID !== currentNote) {
           newArr.push(notes[i])
+        } else {
+          localStorage.removeItem(i)
         }
       }
       setNotes(newArr)

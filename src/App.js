@@ -22,14 +22,19 @@ function App() {
   }
 
   React.useEffect(() => {
-    for (let i = 0; i <= localStorage.length; i++) {
-      let note = JSON.parse(localStorage.getItem(i));
-      if(note !== null){
-        console.log(note)
-        setNotes(prevNotes => [...prevNotes, note])
+    let notesArr = JSON.parse(localStorage.getItem("notes"));
+    if (notesArr) {
+      for (let i = 0; i < notesArr.length; i++) {
+        console.log(notesArr[i])
+        setNotes(prevNotes => [...prevNotes, notesArr[i]])
       }
     }
   }, [])
+
+  React.useEffect(() => {
+    console.log(notes)
+    localStorage.setItem("notes", JSON.stringify(notes))
+  }, [notes])
 
   function addNote() {
     let noteObj = {
@@ -42,7 +47,6 @@ function App() {
       text: noteObj.text,
       title: noteObj.title
     }])
-    localStorage.setItem(localStorage.length, JSON.stringify(noteObj))
   }
 
   function displayNote(noteID) {
@@ -68,11 +72,10 @@ function App() {
       for (let i = 0; i < notes.length; i++) {
         if (notes[i].noteID !== currentNote) {
           newArr.push(notes[i])
-        } else {
-          localStorage.removeItem(i)
         }
       }
       setNotes(newArr)
+      localStorage.setItem("notes", JSON.stringify(newArr))
       setValue(prevValue => {
         return {
           text: "",

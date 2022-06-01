@@ -91,35 +91,34 @@ function App() {
     <div className={darkMode ? "dark" : "light"}
       data-color-mode={darkMode ? "dark" : "light"}
     >
-      <div className="btnrow mb-2">
-        <h1 className="title text-center">Title</h1>
-        <input
-          className="form-control mb-2"
-          type="text"
-          placeholder="Note Title"
-          name="title"
-          onChange={(e) => setValue(prevValue => {
-            return {
-              ...prevValue,
-              title: e.target.value
-            }
-          })}
-          value={value.title}
-        />
-        <button className="btn btn-success" onClick={addNote}>Save note</button>
-        <button className=" btn btn-danger" onClick={() => delNote(currentNote)}>Delete note</button>
-        <button className="btn btn-dark" onClick={toggle}>Dark mode</button>
-      </div>
-
-      <div className="row vh-100">
-        <div className="col-2 pe-0">
+      <div className="row">
+        <div className="col-2 pe-0 pt-2 sideBarCol">
           <Sidebar
             notes={notes}
             handleClick={displayNote}
             mode={darkMode}
           />
         </div>
-        <div className="col-10 ps-0">
+        <div className="col-10">
+          <div className="row btnRow ps-2">
+            <h1 className="title text-center">Notes App</h1>
+            <input
+              className="form-control mb-2"
+              type="text"
+              placeholder="Note Title"
+              name="title"
+              onChange={(e) => setValue(prevValue => {
+                return {
+                  ...prevValue,
+                  title: e.target.value
+                }
+              })}
+              value={value.title}
+            />
+            <button className="btn btn-success mx-1 mb-1" onClick={addNote}>Save note</button>
+            <button className=" btn btn-danger mx-1 mb-1" onClick={() => delNote(currentNote)}>Delete note</button>
+            <button className="btn btn-dark mx-1 mb-1" onClick={toggle}>Dark mode</button>
+          </div>
           <MDEditor
             value={value.text}
             height={vpHeight}
